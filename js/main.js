@@ -25,27 +25,28 @@ const cardImg = [
     "img/c6_tripletsparrot.gif",
     "img/c7_unicornparrot.gif",
 ];
-const card = `<div class="card" onclick="flipCard()">
+
+const cardDiv = `<div class="card" onclick="flipCard(this)">
 <img class="card-back" src="img/back.png" alt="back">
 <img class="card-front" src="img/c1_bobrossparrot.gif" alt="front">
 </div>`;
 
-// const card = `<div class="card">
+// const card = `<div class="card" onclick="flipCard(this)">
 // <img class="card-back" src="img/back.png" alt="back">
 // <img class="card-front" src="img/c1_bobrossparrot.gif" alt="front">
 // </div>`;
 
 function dealCards(cardCount) {
     for (let i = 0; i < cardCount; i++) {
-        game.innerHTML += card;
+        game.innerHTML += cardDiv;
     }
 }
 
-const cards = document.querySelectorAll('.card');
+const card = document.querySelectorAll('.card');
 
-function flipCard() {
-    this.classList.add('flip');
-    console.log("flip");
+function flipCard(el) {
+    el.classList.toggle('flip');
+    // console.log("flip");
   }
 
-cards.forEach(card => card.addEventListener('click', flipCard));
+card.forEach(card => card.addEventListener('click', flipCard));
