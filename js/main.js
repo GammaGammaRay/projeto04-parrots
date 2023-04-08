@@ -29,14 +29,34 @@ const cardImg = [
 
 const cardDiv = `<div class="card" onclick="flipCard(this)">
 <img class="card-back" src="img/back.png" alt="back">
-<img class="card-front" src="img/c1_bobrossparrot.gif" alt="front">
+<img class="card-front" src="${cardImg[Math.floor(Math.random() * cardImg.length)]}" alt="front">
 </div>`;
 
 function dealCards(cardCount) {
-    for (let i = 0; i < cardCount; i++) {
-        game.innerHTML += cardDiv;
+    const cardIndices = [];
+  
+    // Create an array with pairs of random card-back images
+    const cardBacks = [];
+    for (let i = 0; i < cardCount/2; i++) {
+      const randomIndex = Math.floor(Math.random() * cardImg.length);
+      cardBacks.push(cardImg[randomIndex]);
+      cardBacks.push(cardImg[randomIndex]);
     }
-}
+  
+    // Shuffle the card-back images
+    for (let i = cardBacks.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cardBacks[i], cardBacks[j]] = [cardBacks[j], cardBacks[i]];
+    }
+  
+    // Create the HTML for each card with a random card-back image
+    for (let i = 0; i < cardCount; i++) {
+      game.innerHTML += `<div class="card" onclick="flipCard(this)">
+        <img class="card-back" src="img/back.png" alt="back">
+        <img class="card-front" src="${cardImg[i % cardImg.length]}" alt="front">
+      </div>`;
+    }
+  }
 
 const card = document.querySelectorAll('.card');
 
