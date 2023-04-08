@@ -15,14 +15,20 @@ h1 {
   font-weight: 700;
   font-size: 56px;
   color: #75B79E;
-  display: flex;
-  justify-content: center;
+
+  text-align: center;
 }
 
 .game-container {
   min-width: 76%;
   max-width: 76%;
   height: 100%;
+
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -43,18 +49,13 @@ h1 {
 
   background: #A7E9AF;
   display: flex;
-  object-fit:scale-down;
-  /* justify-content: center;
-  align-items: center; */
-  
+  justify-content: center;
+  align-items: center;
   
   /* box-shadow: 1px 1px 1px rgba(0,0,0,.3); */
 }
 
-.card img {
-  object-fit: cover;
-  scale: 80%;
-}
+
 
 .card-front,
 .card-back {
@@ -63,9 +64,13 @@ h1 {
   padding: 20px;
   position: absolute;
   backface-visibility: hidden;
-  
 }
 
+.card img {
+  width: 80%;
+  object-fit: contain;
+
+}
 
 .card-front {
   transform: rotateY(180deg);

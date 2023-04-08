@@ -1,5 +1,5 @@
 function setCardCount() {
-    let cardCount = prompt("Número par de cartas, de 4 a 14:");
+    let cardCount = prompt("Escolha um número par de cartas, entre 4 e 14:");
     
     setTimeout(function() {
         if(cardCount < 4 || cardCount > 14 || cardCount%2 != 0){
@@ -16,6 +16,7 @@ function setCardCount() {
 }
 
 const game = document.getElementById('game-container');
+
 const cardImg = [
     "img/c1_bobrossparrot.gif",
     "img/c2_explodyparrot.gif",
@@ -31,11 +32,6 @@ const cardDiv = `<div class="card" onclick="flipCard(this)">
 <img class="card-front" src="img/c1_bobrossparrot.gif" alt="front">
 </div>`;
 
-// const card = `<div class="card" onclick="flipCard(this)">
-// <img class="card-back" src="img/back.png" alt="back">
-// <img class="card-front" src="img/c1_bobrossparrot.gif" alt="front">
-// </div>`;
-
 function dealCards(cardCount) {
     for (let i = 0; i < cardCount; i++) {
         game.innerHTML += cardDiv;
@@ -46,7 +42,6 @@ const card = document.querySelectorAll('.card');
 
 function flipCard(el) {
     el.classList.toggle('flip');
-    // console.log("flip");
   }
 
 card.forEach(card => card.addEventListener('click', flipCard));
