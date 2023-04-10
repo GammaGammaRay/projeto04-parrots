@@ -1,3 +1,4 @@
+
 function setCardCount() {
     let cardCount = prompt("Escolha um número par de cartas, entre 4 e 14:");
     
@@ -8,6 +9,7 @@ function setCardCount() {
         }
         else {
             dealCards(cardCount);
+            
         }
     }
         
@@ -42,7 +44,6 @@ function dealCards(cardCount) {
     
     // Create an array with pairs of random card-back images
     const cardFronts = [];
-    console.log("imageArr.len:" + cardImg.length)
     while (cardFronts.length < cardCount) {
         const randomIndex = Math.floor(Math.random() * availableCards.length);
         const randomCard = availableCards[randomIndex];
@@ -57,6 +58,8 @@ function dealCards(cardCount) {
         availableCards.splice(randomIndex, 1);
       }
 
+      
+
       for (let i = cardFronts.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [cardFronts[i], cardFronts[j]] = [cardFronts[j], cardFronts[i]];
@@ -64,18 +67,26 @@ function dealCards(cardCount) {
     
     // Create the HTML for each card with a random card-back image
     for (let i = 0; i < cardCount; i++) {
-      game.innerHTML += `<div class="card" onclick="flipCard(this)">
-        <img class="card-back" src="${cardBack}" alt="back">
-        <img class="card-front" src="${cardFronts[i]}" alt="front">
+      game.innerHTML += `<div class="card" data-test="card" onclick="flipCard(this)">
+        <img class="card-back" data-test="face-down-image" src="${cardBack}" alt="back">
+        <img class="card-front" data-test="face-up-image" src="${cardFronts[i]}" alt="front">
       </div>`;
     }
-
+    
+    updateCardCount();
+    // card.forEach(card => card.addEventListener('click', flipCard));
   }
 
-const card = document.querySelectorAll('.card');
+function updateCardCount() {
+    const card = document.querySelectorAll('.card');
+    cardCt = card.length;
+    console.log("card count: " + cardCt);
+}
+
+let jogadas = 0;
 
 function flipCard(el) {
-    if(document.querySelectorAll('.flip').length >= 2) {
+    if(document.querySelectorAll('.flip').length >= 2 || el.classList.contains('flip')) {
         return;
     }
 
@@ -88,13 +99,20 @@ function flipCard(el) {
         const front1 = flipped[0].querySelector('.card-front').getAttribute('src');
         const front2 = flipped[1].querySelector('.card-front').getAttribute('src');
 
+        jogadas++;
+
         if (front1 === front2) {
             flipped.forEach((element) => {
               element.classList.remove('flip');
               element.classList.add('matched');
             });
+            if (document.querySelectorAll('.matched').length === cardCt) {
+                setTimeout(() => {
+                    alert("Você ganhou em " + jogadas + " jogadas!");
+                  }, 200);
+            }
           } else {
-            // Cards do not match
+            // Cards do 44not match
             setTimeout(() => {
               flipped.forEach((element) => {
                 element.classList.remove('flip');
@@ -104,4 +122,3 @@ function flipCard(el) {
     }
   }
 
-card.forEach(card => card.addEventListener('click', flipCard));
