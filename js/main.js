@@ -118,7 +118,7 @@ function flipCard(el) {
                 let restart;
                 
                 while(restart != "sim" && restart != "não") {
-                    restart = prompt("gostaria de reiniciar a partida? (\"sim\" ou \"não\")");
+                    restart = prompt("Você gostaria de reiniciar a partida? (sim ou não)");
                 }
                 if (restart === "sim") {
                     location.reload();
