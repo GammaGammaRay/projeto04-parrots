@@ -74,6 +74,7 @@ function dealCards(cardCount) {
     }
     
     updateCardCount();
+    stopWatch();
     // card.forEach(card => card.addEventListener('click', flipCard));
   }
 
@@ -84,6 +85,7 @@ function updateCardCount() {
 }
 
 let jogadas = 0;
+let gameEnd = false;
 
 function flipCard(el) {
     if(document.querySelectorAll('.flip').length >= 2 || el.classList.contains('flip')) {
@@ -106,13 +108,31 @@ function flipCard(el) {
               element.classList.remove('flip');
               element.classList.add('matched');
             });
+
+            // end game state check
             if (document.querySelectorAll('.matched').length === cardCt) {
+                gameEnd = true;
                 setTimeout(() => {
-                    alert("Você ganhou em " + jogadas + " jogadas!");
+                    alert("Você ganhou em " + jogadas + " jogadas!" + " A duração do jogo foi de " + finalTime + " segundos!");
+
+                let restart;
+                
+                while(restart != "sim" && restart != "não") {
+                    restart = prompt("gostaria de reiniciar a partida? (\"sim\" ou \"não\")");
+                }
+                if (restart === "sim") {
+                    location.reload();
+                }
+                else if (restart === "não") {
+                    return;
+                } else {
+                    const restart = prompt("gostaria de reiniciar a partida?");
+                }
                   }, 200);
+                
             }
           } else {
-            // Cards do 44not match
+            // Cards do not match
             setTimeout(() => {
               flipped.forEach((element) => {
                 element.classList.remove('flip');
@@ -122,3 +142,25 @@ function flipCard(el) {
     }
   }
 
+// seconds elapsed
+let count = 00;
+let second = 00;
+let finalTime = -1;
+
+function stopWatch() {
+    if (gameEnd) {
+        finalTime = second;
+    }
+    else {
+        count++;
+
+        if (count == 100) {
+            second++;
+            count = 0;
+        }
+        let secString = `${second}`
+        document.getElementById('seconds').innerHTML = second;
+        setTimeout(stopWatch, 10);
+    }
+    
+}

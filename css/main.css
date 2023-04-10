@@ -19,6 +19,16 @@ h1 {
   text-align: center;
 }
 
+#seconds {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  font-size: 44px;
+  font-weight: 500;
+  color: #75B79E;
+  margin: 5px;
+}
+
 .game-container {
   min-width: 76%;
   max-width: 76%;
