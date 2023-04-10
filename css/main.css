@@ -24,17 +24,10 @@ h1 {
   max-width: 76%;
   height: 100%;
 
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
-
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   perspective: 1000px;
-
-  background-color: greenyellow;
 }
 
 .card {
@@ -83,5 +76,11 @@ h1 {
 }
 
 .card.flip {
+  transform: rotateY(180deg);
+}
+
+.card.matched {
+  transform: scale(1.1);
+  transition: transform .2s;
   transform: rotateY(180deg);
 }

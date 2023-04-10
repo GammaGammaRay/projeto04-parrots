@@ -1,10 +1,10 @@
 {
   "name": "projeto04-parrot",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "projeto 04 driven",
   "keywords": ["driven"],
   "license": "",
-  "author": "",
+  "author": "Benjamin Peret",
   "scripts": {
     "build": "parcel build index.html",
     "dev": "parcel index.html --open",
